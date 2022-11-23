@@ -12,7 +12,7 @@ exports.getAllBattle = catchAsync(async (req, res) => {
   const io = req.app.get("io");
 
   const battle = await Battle.find().sort({ $natural: -1 });
-  io.emit("Battle-added", battle);
+  // io.emit("Battle-added", battle);
 
   res.status(200).json({
     message: "success",
@@ -33,7 +33,7 @@ exports.createBattle = catchAsync(async (req, res, next) => {
   const newBattle = await Battle.create(req.body);
   const battle = await Battle.find().sort({ $natural: -1 });
 
-  io.emit("battle-added", battle);
+  // io.emit("battle-added", battle);
 
   res.status(201).json({
     status: "success",
@@ -56,7 +56,7 @@ exports.updateBattle = catchAsync(async (req, res, next) => {
   battle.user_a.like = req.body.user_a.like;
   battle.user_b.like = req.body.user_b.like;
 
-  io.emit("battle-added", battle);
+  // io.emit("battle-added", battle);
   await battle.save();
 
   res.status(201).json({
